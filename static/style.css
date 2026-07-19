@@ -1,0 +1,102 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 24px;
+}
+
+.container { max-width: 960px; margin: 0 auto; }
+
+h1 { margin-bottom: 4px; }
+.subtitle { color: #94a3b8; margin-top: 0; margin-bottom: 24px; }
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 760px) {
+  .main-grid { grid-template-columns: 1fr; }
+}
+
+.cam-panel {
+  position: relative;
+  background: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+video { width: 100%; display: block; transform: scaleX(-1); border-radius: 12px; }
+.hidden { display: none; }
+
+.overlay {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(15, 23, 42, 0.75);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 22px;
+  font-weight: 700;
+}
+#live-conf { font-size: 13px; font-weight: 400; color: #94a3b8; margin-left: 8px; }
+
+.control-panel {
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+label { font-size: 13px; color: #94a3b8; display: block; margin-bottom: 6px; }
+
+#sentence-box {
+  min-height: 56px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 24px;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  word-break: break-word;
+}
+
+.buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+
+button {
+  background: #334155;
+  color: #e2e8f0;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+button:hover { background: #475569; }
+button.primary { background: #2563eb; }
+button.primary:hover { background: #1d4ed8; }
+
+.settings { margin-top: 8px; }
+.settings input[type="range"] { width: 100%; margin-bottom: 4px; }
+.settings span { font-size: 12px; color: #94a3b8; }
+
+.hint { font-size: 12px; color: #94a3b8; margin-top: 16px; }
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #334155;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+#progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #22c55e;
+  transition: width 0.08s linear;
+}

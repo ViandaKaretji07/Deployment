@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deteksi Bahasa Isyarat</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <h1>Deteksi Bahasa Isyarat (SIBI)</h1>
+    <p class="subtitle">Model aktif: <strong>{{ model_name }}</strong> &middot; {{ classes|length }} kelas</p>
+
+    <div class="main-grid">
+      <div class="cam-panel">
+        <video id="video" autoplay playsinline muted></video>
+        <canvas id="canvas" class="hidden"></canvas>
+        <div class="overlay">
+          <span id="live-label">-</span>
+          <span id="live-conf"></span>
+        </div>
+      </div>
+
+      <div class="control-panel">
+        <label>Kalimat tersusun</label>
+        <div id="sentence-box">&nbsp;</div>
+
+        <div class="buttons">
+          <button id="btn-space">Spasi</button>
+          <button id="btn-backspace">Hapus</button>
+          <button id="btn-clear">Bersihkan</button>
+          <button id="btn-speak" class="primary">🔊 Ucapkan</button>
+        </div>
+
+        <audio id="audio-player" class="hidden"></audio>
+
+        <div class="settings">
+          <label for="hold-threshold">Ambang tahan (frame konsisten)</label>
+          <input type="range" id="hold-threshold" min="5" max="30" value="15" />
+          <span id="hold-threshold-val">15</span>
+
+          <label for="conf-threshold">Ambang confidence minimum</label>
+          <input type="range" id="conf-threshold" min="0" max="100" value="70" />
+          <span id="conf-threshold-val">70%</span>
+        </div>
+
+        <p class="hint">
+          Tahan satu isyarat di depan kamera hingga bar konsistensi penuh untuk
+          menambahkannya ke kalimat. Ini mencegah huruf yang sama terbaca berulang.
+        </p>
+        <div class="progress-bar"><div id="progress-fill"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
