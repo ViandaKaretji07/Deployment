@@ -156,16 +156,20 @@ def predict():
     try:
         image_bgr = decode_base64_image(payload["image"])
         if image_bgr is None:
+            print("[predict] Gagal decode citra dari base64")
             return jsonify({"error": "Gagal decode citra"}), 400
 
         feat = extract_landmarks(image_bgr)
         if feat is None:
+            print(f"[predict] Citra ok (shape={image_bgr.shape}) tapi tangan TIDAK terdeteksi MediaPipe")
             return jsonify({"detected": False, "label": None, "confidence": 0.0})
 
         label, conf = predict_from_features(feat)
+        print(f"[predict] Terdeteksi: {label} ({conf:.2f})")
         return jsonify({"detected": True, "label": str(label), "confidence": conf})
 
     except Exception as e:
+        print(f"[predict] ERROR: {e}")
         return jsonify({"error": str(e)}), 500
 
 
