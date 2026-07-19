@@ -52,6 +52,8 @@ function captureFrameAsBase64() {
 // ---------------------------------------------------------------------------
 // Loop prediksi
 // ---------------------------------------------------------------------------
+let frameCounter = 0;
+
 async function predictLoop() {
   if (!busy) {
     busy = true;
@@ -63,6 +65,13 @@ async function predictLoop() {
         body: JSON.stringify({ image: imageData }),
       });
       const data = await res.json();
+      frameCounter += 1;
+      if (frameCounter % 20 === 0) {
+        console.log(`[debug] frame #${frameCounter}, video: ${video.videoWidth}x${video.videoHeight}, response:`, data);
+      }
+      if (data.error) {
+        console.error("Server error dari /predict:", data.error);
+      }
       handlePrediction(data);
     } catch (err) {
       console.error("Predict error:", err);
