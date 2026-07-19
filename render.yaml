@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: deteksi-bahasa-isyarat
+    env: python
+    plan: free
+    buildCommand: >
+      pip install -r requirements.txt &&
+      wget -q -O hand_landmarker.task https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task
+    startCommand: gunicorn app:app --timeout 120 --workers 1 --threads 4
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9

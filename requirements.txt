@@ -1,0 +1,11 @@
+flask==3.0.3
+gunicorn==22.0.0
+opencv-python-headless==4.10.0.84
+mediapipe==0.10.14
+scikit-learn==1.5.1
+joblib==1.4.2
+numpy==1.26.4
+gTTS==2.5.1
+# Hanya dibutuhkan jika model terbaik = MLP (Keras). Jika model terbaik adalah
+# Random Forest / SVM, baris ini boleh dihapus agar build lebih ringan & cepat.
+tensorflow-cpu==2.16.1
