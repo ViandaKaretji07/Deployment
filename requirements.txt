@@ -2,7 +2,7 @@ flask==3.0.3
 gunicorn==22.0.0
 opencv-python-headless==4.10.0.84
 mediapipe==0.10.21
-scikit-learn==1.5.1
+scikit-learn==1.6.1
 joblib==1.4.2
 numpy==1.26.4
 gTTS==2.5.1
