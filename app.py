@@ -19,6 +19,7 @@ import os
 import io
 import json
 import base64
+import urllib.request
 
 import cv2
 import numpy as np
@@ -37,6 +38,24 @@ from gtts import gTTS
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = os.path.join(BASE_DIR, "model")
 LANDMARKER_TASK_PATH = os.path.join(BASE_DIR, "hand_landmarker.task")
+LANDMARKER_TASK_URL = (
+    "https://storage.googleapis.com/mediapipe-models/hand_landmarker/"
+    "hand_landmarker/float16/1/hand_landmarker.task"
+)
+
+
+def ensure_hand_landmarker_model():
+    """Unduh hand_landmarker.task jika belum ada di server. Ini jaring pengaman
+    kalau langkah wget di Build Command tidak berjalan (mis. Build Command di
+    Render dashboard belum diedit sesuai README)."""
+    if os.path.exists(LANDMARKER_TASK_PATH) and os.path.getsize(LANDMARKER_TASK_PATH) > 0:
+        return
+    print("hand_landmarker.task tidak ditemukan, mengunduh dari Google...")
+    urllib.request.urlretrieve(LANDMARKER_TASK_URL, LANDMARKER_TASK_PATH)
+    print(f"Berhasil diunduh ke {LANDMARKER_TASK_PATH}")
+
+
+ensure_hand_landmarker_model()
 
 with open(os.path.join(MODEL_DIR, "model_info.json"), "r") as f:
     MODEL_INFO = json.load(f)
